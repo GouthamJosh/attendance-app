@@ -1,17 +1,14 @@
 const token = localStorage.getItem("token");
 
-/* PROTECT PAGES */
 if (!token && location.pathname !== "/login.html") {
   location.href = "/login.html";
 }
 
-/* LOGOUT */
 function logout() {
   localStorage.removeItem("token");
   location.href = "/login.html";
 }
 
-/* ADD STUDENT */
 async function addStudent() {
   await fetch("/students", {
     method: "POST",
@@ -22,13 +19,14 @@ async function addStudent() {
     body: JSON.stringify({
       name: name.value,
       rollNo: rollNo.value,
-      className: className.value
+      className: className.value,
+      division: division.value,
+      semester: semester.value
     })
   });
   alert("Student Added");
 }
 
-/* MARK ATTENDANCE */
 async function markAttendance() {
   const students = await fetch("/students", {
     headers: { "Authorization": token }
@@ -51,6 +49,6 @@ async function markAttendance() {
     })
   });
 
-  const msg = await res.json();
-  alert(msg);
+  alert(await res.json());
 }
+
