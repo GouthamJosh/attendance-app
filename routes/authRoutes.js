@@ -4,23 +4,38 @@ const jwt = require("jsonwebtoken");
 const Teacher = require("../models/Teacher");
 const router = express.Router();
 
-/* REGISTER TEACHER (USE ONCE via Postman) */
+/* SIGN UP (REGISTER) */
 router.post("/register", async (req, res) => {
-  const hashed = await bcrypt.hash(req.body.password, 10);
+  const { email, password } = req.body;
+
+  const exists = await Teacher.findOne({ email });
+  if (exists) {
+    return res.status(400).json("Teacher already exists");
+  }
+
+  const hashedPassword = await bcrypt.hash(password, 10);
+
   await new Teacher({
-    email: req.body.email,
-    password: hashed
+    email,
+    password: hashedPassword
   }).save();
-  res.json("Teacher Registered");
+
+  res.json("Teacher registered successfully");
 });
 
 /* LOGIN */
 router.post("/login", async (req, res) => {
-  const teacher = await Teacher.findOne({ email: req.body.email });
-  if (!teacher) return res.status(401).json("Invalid email");
+  const { email, password } = req.body;
 
-  const valid = await bcrypt.compare(req.body.password, teacher.password);
-  if (!valid) return res.status(401).json("Invalid password");
+  const teacher = await Teacher.findOne({ email });
+  if (!teacher) {
+    return res.status(401).json("Teacher not registered");
+  }
+
+  const valid = await bcrypt.compare(password, teacher.password);
+  if (!valid) {
+    return res.status(401).json("Incorrect password");
+  }
 
   const token = jwt.sign(
     { id: teacher._id },
