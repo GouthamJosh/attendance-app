@@ -3,18 +3,19 @@
 <head>
   <title>Teacher Sign Up</title>
   <link rel="stylesheet" href="style.css">
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body>
 
 <div class="card">
   <h2>Teacher Sign Up</h2>
-
   <input id="email" placeholder="Email">
   <input id="password" type="password" placeholder="Password">
 
-  <button onclick="signup()">Create Account</button>
+  <div class="g-recaptcha" data-sitekey="YOUR_SITE_KEY"></div>
 
-  <a href="login.html">Already have an account? Login</a>
+  <button onclick="signup()">Create Account</button>
+  <a href="login.html">Already have account?</a>
 </div>
 
 <script src="auth.js"></script>
