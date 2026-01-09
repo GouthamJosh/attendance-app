@@ -1,12 +1,19 @@
 <!DOCTYPE html>
 <html>
+<head>
+  <title>Attendance</title>
+  <link rel="stylesheet" href="style.css">
+</head>
 <body>
-<h2>Mark Attendance</h2>
 
-<input id="date" type="date">
-<button onclick="markAttendance()">Submit</button>
-<br><br>
-<button onclick="logout()">Logout</button>
+<div class="card">
+  <h2>Mark Attendance</h2>
+
+  <input id="date" type="date">
+  <button onclick="markAttendance()">Submit Attendance</button>
+
+  <button class="logout" onclick="logout()">Logout</button>
+</div>
 
 <script src="script.js"></script>
 </body>
