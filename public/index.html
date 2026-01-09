@@ -1,16 +1,25 @@
 <!DOCTYPE html>
 <html>
+<head>
+  <title>Add Students</title>
+  <link rel="stylesheet" href="style.css">
+</head>
 <body>
-<h2>Add Students</h2>
 
-<input id="name" placeholder="Name">
-<input id="rollNo" placeholder="Roll No">
-<input id="className" placeholder="Class">
-<button onclick="addStudent()">Add</button>
+<div class="card">
+  <h2>Add Student</h2>
 
-<br><br>
-<button onclick="logout()">Logout</button>
-<a href="attendance.html">Mark Attendance</a>
+  <input id="name" placeholder="Student Name">
+  <input id="rollNo" placeholder="Roll Number">
+  <input id="className" placeholder="Class">
+  <input id="division" placeholder="Division">
+  <input id="semester" placeholder="Semester">
+
+  <button onclick="addStudent()">Add Student</button>
+
+  <a href="attendance.html">Mark Attendance</a>
+  <button class="logout" onclick="logout()">Logout</button>
+</div>
 
 <script src="script.js"></script>
 </body>
